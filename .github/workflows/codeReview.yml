@@ -63,9 +63,8 @@ jobs:
 
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_ORG: ${{ secrets.SONAR_ORGANIZATION }}
-
+          SONAR_PROJECTKEY: ${{ secrets.SONAR_PROJECT_KEY }}
+          SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
       - name: Save SonarCloud Summary
         run: |
           echo "## SonarCloud Scan Triggered" > sonarcloud-result.txt
