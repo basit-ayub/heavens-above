@@ -27,6 +27,7 @@ node run.js
 
 * [Mimi](https://zhangshuqiao.org) Developer of this project.  
 * Inspired by https://github.com/chengxinlun/haQuery
+* basit-ayub on Github and LinkedIn and Youtbe
 
 ## License
 
