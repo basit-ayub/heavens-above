@@ -62,9 +62,11 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5.0.0
 
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECTKEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
+             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+             SONAR_HOST_URL: https://sonarcloud.io
+             SONAR_PROJECTKEY: ${{ secrets.SONAR_PROJECT_KEY }}
+             SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
+             
       - name: Save SonarCloud Summary
         run: |
           echo "## SonarCloud Scan Triggered" > sonarcloud-result.txt
