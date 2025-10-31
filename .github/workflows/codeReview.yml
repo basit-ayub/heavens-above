@@ -77,21 +77,29 @@ jobs:
           path: sonarcloud-result.txt
 
   post-results:
-    needs: [codeql, sonarcloud]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v5
-        with:
-          name: codeql-result
-          path: ./
-      - uses: actions/download-artifact@v5
-        with:
-          name: sonarcloud-result
-          path: ./
-      - name: Comment on Pull Request
-        uses: thollander/actions-comment-pull-request@v3
-        with:
-          filePath: ./codeql-result.txt
-          filePathInput2: ./sonarcloud-result.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  needs: [codeql, sonarcloud]
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/download-artifact@v5
+      with:
+        name: codeql-result
+        path: ./
+    - uses: actions/download-artifact@v5
+      with:
+        name: sonarcloud-result
+        path: ./
+
+    - name: Combine results
+      run: |
+        echo "### CodeQL & SonarCloud Summary" > final-result.txt
+        echo "" >> final-result.txt
+        cat codeql-result.txt >> final-result.txt
+        echo "" >> final-result.txt
+        cat sonarcloud-result.txt >> final-result.txt
+
+    - name: Comment on Pull Request
+      uses: thollander/actions-comment-pull-request@v3
+      with:
+        file-path: ./final-result.txt
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
