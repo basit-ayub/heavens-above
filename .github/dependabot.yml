@@ -10,3 +10,10 @@ updates:
       prefix: "chore(deps)"
     reviewers:
       - "basit-ayub"    
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    pull-request-branch-name:
+      separator: "/"
