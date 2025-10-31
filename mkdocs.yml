@@ -1,7 +1,0 @@
-site_name: GitHub Actions Assignment Docs
-docs_dir: docs
-site_dir: site
-theme:
-  name: material
-nav:
-  - Home: index.md
