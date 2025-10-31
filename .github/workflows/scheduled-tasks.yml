@@ -1,5 +1,4 @@
-name: Scheduled Repository Health Check
-
+name: Scheduled Task
 on:
   schedule:
     - cron: '0 2 * * 0'        
@@ -29,7 +28,7 @@ jobs:
 
       - name: Upload error log (if any)
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: error_log_autoGen
           path: repo_errors.txt
