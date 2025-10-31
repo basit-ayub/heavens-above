@@ -32,7 +32,7 @@ jobs:
           echo "${{ steps.codeql.outcome }}" >> codeql-result.txt
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: codeql-result
           path: codeql-result.txt
@@ -70,7 +70,7 @@ jobs:
           echo "See the SonarCloud dashboard for full results." >> sonarcloud-result.txt
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v5
         with:
           name: sonarcloud-result
           path: sonarcloud-result.txt
@@ -79,16 +79,16 @@ jobs:
     needs: [codeql, sonarcloud]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v5
         with:
           name: codeql-result
           path: ./
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v5
         with:
           name: sonarcloud-result
           path: ./
       - name: Comment on Pull Request
-        uses: thollander/actions-comment-pull-request@v2
+        uses: thollander/actions-comment-pull-request@v3
         with:
           filePath: ./codeql-result.txt
           filePathInput2: ./sonarcloud-result.txt
