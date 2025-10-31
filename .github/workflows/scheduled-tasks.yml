@@ -18,6 +18,7 @@ jobs:
       - name: Check for important files
         run: |
           touch repo_errors.txt
+          pwd
           test -f package.json || echo "Missing package.json" >> repo_errors.txt
           test -f public/index.html || echo "Missing index.html in public/" >> repo_errors.txt
           test -f public/data/satallite25544/index.json || echo "Missing index.json in public/" >> repo_errors.txt
@@ -27,12 +28,11 @@ jobs:
         run: |
           jq . public/data/satallite25544/index.json || echo "Invalid src/index.json" >> repo_errors.txt
 
-      - name: Upload error log (if any)
-        if: failure()
+      - name: Upload error log
         uses: actions/upload-artifact@v4
         with:
           name: error_log_autoGen
-          path: repo_errors.txt
+          path: ./repo_errors.txt
 
       - name: Echo completion
         run: echo "Scheduled repo health check completed."
