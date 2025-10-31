@@ -18,16 +18,14 @@ jobs:
       - name: Check for important files
         run: |
           touch repo_errors.txt
-          pwd
-          ls
           test -f ./package.json || echo "Missing package.json" >> repo_errors.txt
           test -f ./public/index.html || echo "Missing index.html in public/" >> repo_errors.txt
-          test -f ./public/data/satallite25544/index.json || echo "Missing index.json in public/" >> repo_errors.txt
+          test -f ./public/data/satellite25544/index.json || echo "Missing index.json in public/" >> repo_errors.txt
           test -f ./README.md || echo "Missing README.md" >> repo_errors.txt
 
       - name: Validate JSON files
         run: |
-          jq . ./public/data/satallite25544/index.json || echo "Invalid src/index.json" >> repo_errors.txt
+          jq . ./public/data/satellite25544/index.json || echo "Invalid src/index.json" >> repo_errors.txt
 
       - name: Upload error log
         uses: actions/upload-artifact@v4
