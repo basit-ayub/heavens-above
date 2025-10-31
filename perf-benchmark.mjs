@@ -1,10 +1,10 @@
 // perf-benchmark.mjs
 import lighthouse from 'lighthouse';
-import chromeLauncher from 'chrome-launcher';
+import * as chromeLauncher from 'chrome-launcher'; 
 import fs from 'fs';
 
 async function runAudit() {
-  const url = 'https://heavens-above-nine.vercel.app'; 
+  const url = 'https://heavens-above-nine.vercel.app/'; 
 
   let chrome = null;
   try {
@@ -28,17 +28,12 @@ async function runAudit() {
     fs.writeFileSync('perf-report.md', summary);
     console.log(summary);
 
-    // Optionally save full JSON report
-    fs.writeFileSync('lighthouse-full.json', JSON.stringify(runnerResult.lhr, null, 2));
   } catch (err) {
     console.error('Error running Lighthouse:', err);
-    // Write an error report so the workflow has an artifact to inspect
     fs.writeFileSync('perf-report.md', `### ⚠️ Performance Benchmark Failed\n\n${err.message}\n`);
     process.exitCode = 1;
   } finally {
-    if (chrome) {
-      await chrome.kill();
-    }
+    if (chrome) await chrome.kill();
   }
 }
 
