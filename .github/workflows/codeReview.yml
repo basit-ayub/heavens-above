@@ -107,9 +107,15 @@ jobs:
           script: |
             const fs = require('fs');
             const body = fs.readFileSync('final-result.txt', 'utf8');
-            await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body
-            });
+            try {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body
+              });
+              console.log("Comment posted successfully ✅");
+            } catch (error) {
+              console.warn("⚠️ Could not post comment. Likely a forked PR or insufficient permissions.");
+              console.warn(error.message);
+            }
