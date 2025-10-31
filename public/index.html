@@ -225,6 +225,7 @@ function appendThead() {
 }
 
 function showData(target, type) {
+	console.log(target);
 	fetch(`data/${target}/index.json`)
 		.then(response => response.json())
 		.then(obj => {
