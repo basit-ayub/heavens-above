@@ -29,7 +29,7 @@ jobs:
         run: node perf-benchmark.mjs
 
       - name: Upload Report Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: perf-report
           path: perf-report.md
