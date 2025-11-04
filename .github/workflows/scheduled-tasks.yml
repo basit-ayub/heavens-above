@@ -28,7 +28,7 @@ jobs:
           jq . ./public/data/satellite25544/index.json || echo "Invalid src/index.json" >> repo_errors.txt
 
       - name: Upload error log
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: error_log_autoGen
           path: ./repo_errors.txt
